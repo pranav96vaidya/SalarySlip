@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+.mat-progress-spinner {
+    margin: 0 auto;
+    top: 270px;
+}
+
+.mat-progress-spinner circle, .mat-spinner circle {
+    stroke: black;
+}
+
+@media (max-width: 769px) {
+    .mat-progress-spinner {
+        left: 350px;
+        top: 200px;
+    }
+}
+
+@media (max-width: 767px) {
+    .mat-progress-spinner {
+        left: 250px;
+        top: 200px;
+    }
+}

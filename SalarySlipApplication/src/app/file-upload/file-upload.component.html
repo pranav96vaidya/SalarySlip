@@ -1,0 +1,14 @@
+<div class="offset-sm-3 col-sm-6 col-lg-4 offset-lg-4">
+  <div class="wrapper">
+    <p class="head-content">Please select a file with csv extension and upload the file.</p>
+      <div>
+          <i class="fa fa-upload" aria-hidden="true"></i>
+      </div> 
+      <div class="upload-container text-center"> 
+          <input type="file" class="upload-btn"
+               id="file"
+               (change)="handleFileInput($event.target.files)" accept=".csv">
+          <input type="submit" class="btn btn-primary">
+      </div>
+  </div>
+</div>

@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login.component';
-import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { LoginService } from '../services/login.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -12,6 +11,6 @@ import { LoginService } from '../services/login.service';
     NgbModule,
     FormsModule
   ],
-  providers: [LoginService]
+  providers: [],
 })
 export class LoginModule { }

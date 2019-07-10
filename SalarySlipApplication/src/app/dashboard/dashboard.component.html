@@ -1,3 +1,51 @@
-<p>
-  Welcome {{username}}!
-</p>
+<div *ngIf="!fetchDone">
+  <div class="row data-container">
+    <mat-spinner [diameter]="40"></mat-spinner>
+  </div>
+</div>
+<div class="row" *ngIf="fetchDone">
+  <div class="col-sm-3 filter-form">
+    <form>
+      <div class="form-group">
+        <select class="form-control">
+          <option selected>Select Employee</option>
+          <option *ngFor="let emp of users">{{emp.fullName}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <select class="form-control">
+          <option *ngFor="let year of years" [selected]="year == currentYear">{{year}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <select class="form-control" id="exampleFormControlSelect1">
+          <option *ngFor="let month of months" [selected]="month == currentMonth">{{month}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-primary">Search</button>
+      </div>
+    </form>
+    <div class="form-group">
+      <button type="button" class="btn btn-primary" (click)="uploadCsv()">Upload CSV</button>
+    </div>
+  </div>
+  <div class="col-sm-9">
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Sr. No.</th>
+            <th>Full Name</th>
+            <th class="action-head">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let emp of users; let i=index">
+            <td>{{i+1}}</td>
+            <td>{{emp.fullName}}</td>            
+            <td class="view-doc"><a [routerLink]="" (click)="fetchSalarySlip(emp)">View salary slip</a></td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+</div>

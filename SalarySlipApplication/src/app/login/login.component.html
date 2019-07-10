@@ -3,14 +3,14 @@
     <p class="form-head">Sign In </p>
     <form (ngSubmit)="onSubmit()" #loginForm="ngForm" class="login-form">
       <div class="form-group row">
-        <div class="col-3 col-form-label">
+        <div class="col-4 col-form-label">
           <label for="email">Email</label>
         </div>
-        <div class="col-9">
+        <div class="col-8">
           <input type="email" id="email" appHighlight class="form-control" ngModel name="email" required
             pattern="^[\w.+\-]+@newput\.com$" #newTemplateName="ngModel">
-          {{myEmail}}
-          <span class="help-block" *ngIf="loginForm.controls.email && !loginForm.controls.email.valid && loginForm.controls.email.dirty">Please
+          <span class="help-block"
+            *ngIf="loginForm.controls.email && !loginForm.controls.email.valid && loginForm.controls.email.dirty">Please
             enter valid email</span>
           <span class="help-block"
             *ngIf="loginForm.controls.email && loginForm.controls.email.touched && !loginForm.controls.email.valid && !loginForm.controls.email.dirty">This
@@ -18,23 +18,22 @@
         </div>
       </div>
       <div class="form-group row">
-        <div class="col-3 col-form-label">
+        <div class="col-4 col-form-label">
           <label for="password">Password</label>
         </div>
-        <div class="col-9">
+        <div class="col-8">
           <input type="password" id="password" class="form-control" ngModel name="password" required>
+          <span class="help-block"
+            *ngIf="loginForm.controls.password && loginForm.controls.password.touched && !loginForm.controls.password.valid && !loginForm.controls.password.dirty">This
+            field is required</span>
         </div>
       </div>
-      <div class="text-center button-wrapper">
-        <button type="submit" class="btn btn-primary login-btn" [disabled]="!loginForm.valid"> Log In </button>
-        <button type="button" class="btn btn-link forgot-btn white-tooltip" placement="right" ngbTooltip="
+      <div class="button-wrapper text-left row">
+        <button type="submit" class="btn btn-primary login-btn col-3" [disabled]="!loginForm.valid && loginForm.touched"> Log In </button>
+        <button type="button" class="btn btn-link forgot-btn white-tooltip col-9" placement="right" ngbTooltip="
           please go to Time and type register and login with the default password" #t="ngbTooltip">
           Forgot Password ?
         </button>
-        <!-- <button type="button" class="btn btn-outline-secondary mr-2" ngbTooltip="What a great tip!" [autoClose]="false"
-          placement="right" triggers="manual" #t="ngbTooltip" (click)="t.open()">
-          Click me to open a tooltip
-        </button> -->
       </div>
     </form>
   </div>

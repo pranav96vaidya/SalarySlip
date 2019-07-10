@@ -1,0 +1,38 @@
+
+.filter-form {
+    .btn-primary {
+        background-color: #3379B7;
+        width: 100%;
+    }
+
+
+    .form-control {
+        height: 30px;
+    }
+}
+
+.table {
+    tr td, tr th {
+    border: 1px solid #DDDDDD;
+    font-size: 14px;
+    padding: 8px;
+    } 
+
+    .view-doc {
+        text-align: center;
+    }
+
+    .action-head {
+        text-align: center;
+    }
+}
+
+@media (max-width: 767px) {
+    .dashboard-container {
+        .search-btn {
+            text-align: center;
+            width: 50%;
+        }
+    }
+}
+

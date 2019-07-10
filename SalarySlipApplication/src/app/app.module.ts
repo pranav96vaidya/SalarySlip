@@ -1,46 +1,42 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-
+import { MatProgressSpinnerModule } from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginModule } from './login/login.module';
-import { NavComponent } from './login/nav/nav.component';
+import { NavModule } from './nav/nav.module';
+import { FileUploadModule } from './file-upload/file-upload.module';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpInterceptorService } from './services/http-interceptor.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { JwtModule } from '@auth0/angular-jwt';
-import { TokenInterceptorService } from './token-interceptor.service';
+import { SalarySlipComponent } from './salary-slip/salary-slip.component';
+import { FooterComponent } from './footer/footer.component';
+// import { HttpInterceptorService } from './services/http-interceptor.service';
+// import { AuthenticationGuardService } from './services/authentication-gurad.service';
+// import { AuthenticationService } from './services/authentication.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavComponent,
-    DashboardComponent
+    DashboardComponent,
+    SalarySlipComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    LoginModule,
-    NgbModule,
-    HttpClientModule,
     AppRoutingModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: () => {
-          return localStorage.getItem('token');
-        },
-        whitelistedDomains: ['localhost:4200']
-      }
-    })
+    NavModule,
+    FileUploadModule,
+    LoginModule,
+    HttpClientModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptorService,
+      useClass: HttpInterceptorService,
       multi: true
-    }
+    },
   ],
   bootstrap: [AppComponent]
 })

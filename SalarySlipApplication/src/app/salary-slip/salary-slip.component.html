@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-sm-8 offset-sm-2 salary-slip-wrapper">
+    <div class="row head-container">
+      <div class="col-sm-6 offset-sm-3 company-details">
+          <div class="company-name">NEWPUT INFOTECH PVT LTD.</div>
+          <div class="company-address">314 D M Tower, 21/1 Race Course Road Indore</div>
+          <div class="company-address">CIN U723000MP2006PTC018697</div>
+          <div class="company-address">
+            Salary slip for the month of {{currentMonth}} {{currentYear}}
+          </div>
+      </div>
+      <div class="col-sm-12 days-month">
+          No of Days {{currentMonthDays}}
+      </div>
+    </div>
+    <div class="row salary-content">
+      <ng-container *ngFor="let item of salaryDisplayItems">
+        <div class="col-sm-3 col-6" [class.bold-text]="item.isHeading">{{item.itemLabel}}</div>
+        <div class="col-sm-3 col-6" [class.bold-text]="item.isHeading">{{item.itemValue}}</div>
+      </ng-container>
+      <div class="col-sm-3 authority-seal"></div>
+      <div class="col-sm-9 sign-sections">
+        <div class="sign"></div>
+        <div class="sign-content">
+          Authorised Signatory
+        </div>
+      </div>
+      <div id="watermark">
+        CONFIDENTIAL
+      </div>
+    <!-- </div> -->
+    </div>
+  </div>
+  <div class="col-sm-2 print-btn-container">
+    <button class="btn btn-primary" (click)="download()">print</button>
+  </div>
+</div>

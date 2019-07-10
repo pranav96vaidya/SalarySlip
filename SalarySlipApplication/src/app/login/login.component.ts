@@ -1,34 +1,62 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginService } from '../services/login.service';
+import { AuthenticationService } from '../services/authentication.service';
+// import { read } from 'fs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  @ViewChild('loginForm') loginForm : NgForm;
+  @ViewChild('loginForm') loginForm: NgForm;
   email: string;
   password: string;
-  data: {email: string, password: string};
+  data: { email: string, password: string };
   payload: string;
-  constructor(private route: Router, private login: LoginService) { }
+  errorMessage: string = null;
+  cookie: string;
+  constructor(private route: Router, private auth: AuthenticationService) {}
+
 
   ngOnInit() {
+  //   console.log(document.cookie);
+  //   this.cookie = readCookie('token');
+  //   function readCookie(name) {
+  //     var nameEQ = name + "=";
+  //     var ca = document.cookie.split(';');
+  //     for(var i=0;i < ca.length;i++) {
+  //         var c = ca[i];
+  //         while (c.charAt(0)==' ') c = c.substring(1,c.length);
+  //         if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+  //     }
+  //     return null;
+  // }
+  // console.log(this.cookie);
+  // if(this.cookie != null) {
+  //   this.route.navigate(['/home']);
+  // }
+  // this.route.navigate(['/home']);
+    // if(this.auth.getToken()) {
+    //   this.route.navigate(['/home']);
+    // }
   }
 
-  onSubmit() {
-    this.email = this.loginForm.value.email;
-    this.password = this.loginForm.value.password;
-    this.data = {email: this.email, password: this.password};
-    this.login.validateLogin(this.data).subscribe(response => 
-    {
-      localStorage.setItem('token', JSON.stringify(response['data']));
-      this.route.navigate(['./dashboard']);
-      console.log(response['data']);
-    }), console.error();
-  }
+  // onSubmit() {
+  //   const actionPayload = {
+  //     email: this.loginForm.value.email,
+  //     password: this.loginForm.value.password
+  //   };
+    
+  //   this.auth.login(actionPayload.email, actionPayload.password)
+  //   .subscribe(res => {
+  //     console.log(res);
+  //     if(res && res.data) {
+  //       localStorage.setItem('token',res.data);
+  //       this.route.navigate(['/home']);
+  //     }
+  //   },error => console.log(error));
+  //   console.log("welcome");
+  // }
 }
