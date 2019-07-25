@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { UserDetailService } from '../services/user-detail.service';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { EmployeeDataService } from '../services/employee-data.service';
+import { EmployeeDetailService } from '../services/employee-detail.service';
 
 
 // import { User } from './../../models/user';
@@ -31,11 +34,17 @@ export class DashboardComponent implements OnInit {
   currentMonth = this.months[this.month];
   years: number[] = [2017, 2018, 2019];
   currentYear = new Date().getFullYear();
-  constructor(private userService: UserDetailService, private route: Router, private title: Title) {
+  employeeForm: FormGroup;
+  selectedEmp: {};
+  errorMsg: string;
+
+  constructor(private userService: UserDetailService, private route: Router,
+    private title: Title, private empData: EmployeeDataService, private empDetails: EmployeeDetailService) {
     // this.getState = this.store.select(selectAuthenticationState);
   }
 
   ngOnInit() {
+    // console.log(this.route);
     this.title.setTitle('Home Page');
     this.userService.getEmployeeList().subscribe(responseList => {
       console.log(responseList);
@@ -43,24 +52,39 @@ export class DashboardComponent implements OnInit {
       // this.empName = this.responseData2['data'];
       // console.log(response['data']);
       this.fetchDone = true;
-    }, error =>  { 
-        console.log(error);
+    }, err =>  {
+        this.errorMsg = err.error.customMsg;
+        // console.log(err);
         this.fetchDone = true;
     })
     // this.employeeList = JSON.parse(localStorage.getItem("employee"));
     // this.users = this.employeeList['data'];
+    // console.log(this.currentMonth);
+    this.employeeForm = new FormGroup({
+      'emp': new FormControl('', Validators.required),
+      'yearVal': new FormControl(this.currentYear),
+      'monthVal': new FormControl(this.currentMonth)
+    })
+
+    // this.employeeForm.controls['emp'].valueChanges.subscribe((value) => {
+    //   this.selectedEmp = value;
+    // });
+  }
+
+  onSubmit() {
+    console.log(this.employeeForm.value);
+    this.route.navigate(['/employee', this.employeeForm.value.emp.id, 'salarySlip', this.employeeForm.value.emp.id ]);
   }
 
   fetchSalarySlip(emp) {
-    console.log(emp);
-    localStorage.getItem("empId");
-    // this.route.navigate(['/slip', 'employee', {empId: emp.id} , 'salary-slip' , {sId: emp.id}]);
-    this.route.navigate(['/slip', emp.id,emp.id]);
+    console.log(emp.id);
+
+    // this.empData.setEmpDetail(emp);
+    // console.log(emp.fullName);
+    this.route.navigate(['/employee', emp.id]);
   }
 
-  uploadCsv() {
-    console.log("csv");
-    this.route.navigate(['/uploadfile']);
+  uploadSalary() {
+    this.route.navigate(['/uploadSalarySlip']);
   }
-
 }

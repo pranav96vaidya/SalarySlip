@@ -18,24 +18,25 @@ export class HttpInterceptorService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
    
     let authReq = req;
+    // console.log(authReq.url);
     let token = this.auth.getToken();
-    console.log(token);
-    // let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiVTBERFlVTlNEIiwic3RhdHVzIjoiYWRtaW4iLCJpYXQiOjE1NjI1NTc0NjAsImV4cCI6MTU2MjU2MTA2MH0.GV8AouvzUolUgXp_Bbk-9gSD6Z4SprNzGJ2PIQc5-1A";
     if (token) {
       authReq = req.clone({ headers: req.headers.set('token', token)});
     }
 
     return next.handle(authReq).pipe(tap((event: HttpEvent<any>) => {
       if (event instanceof HttpResponse) {
-        console.log(event);
+        // console.log(event);
       }
     }, (err: any) => {
+      console.log(err);
         if (err instanceof HttpErrorResponse) {
           console.log(err);
-          // if (err.status === 402) {
+          if (err.status == 400 || err.status == 401) {
             this.auth.token = null;
-            console.log(this.auth.token);
-            this.router.navigate(['']);
+            location.href="http://newput.timetracker.s3-website-us-west-1.amazonaws.com/login";
+          }
+            // console.log(this.auth.token);
           // }
         }
       }

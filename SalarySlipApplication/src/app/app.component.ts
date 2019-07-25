@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { UserDetailService } from './services/user-detail.service';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,17 +12,22 @@ export class AppComponent implements OnInit{
   userName: string;
   userImg: string;
   fetchDone: boolean;
-  constructor(private userService: UserDetailService) { }
+  constructor(private userService: UserDetailService, private router: Router) { }
   ngOnInit() {
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      window.scrollTo(0, 0)
+    });
     this.userService.getDetail().subscribe(responseList => {
       console.log(responseList);
-      localStorage.setItem('userName', JSON.stringify(responseList['data'].fullName));
-      localStorage.setItem('userImg', JSON.stringify(responseList['data'].profileImgSmall));
-      localStorage.setItem("empId", JSON.stringify(responseList['data'].id));
       this.fetchDone = true;
+      // this.router.navigate(['/home']);
     }, error =>  { 
         console.log(error);
         this.fetchDone = true;
+        // this.router.navigate(['']);
     })
   }
 }

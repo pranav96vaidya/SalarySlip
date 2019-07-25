@@ -24,7 +24,7 @@ export class SalarySlipComponent implements OnInit {
     {beProp:"bank", label:"Bank"} , {beProp: "accountNo", label: "Account No"} , 
     {beProp:"ifsc", label:"IFSC"} , {beProp:"esicNo", label: "ESIC No"} , {beProp:"pfUan", label: "PF UAN"}
   ];
-  salaryDisplayItems = [];
+  salaryDisplayItems;
   month = new Date().getMonth();
   months: string[] = ["January", "February", "March", "April", "May",
     "June", "July", "August", "September", "October", "November", "December"];
@@ -39,11 +39,11 @@ export class SalarySlipComponent implements OnInit {
     private fetchService: FetchSalaryService, @Inject('Window') private window: Window) { }
 
   ngOnInit() {
-    this.title.setTitle('Salary Slip Page');
+    this.title.setTitle('Salary Slip');
     var employee = this.fetchService.fetchSalary();
     this.salaryDisplayItems = [];
     for (var i = 0; i < this.salaryItemsInfo.length; i++) {
-      var itemInfo = this.salaryItemsInfo[i]; //name
+      var itemInfo = this.salaryItemsInfo[i];
       this.salaryDisplayItems.push({
         itemLabel: itemInfo.label || itemInfo.beProp,
         itemValue: employee[itemInfo.beProp],
@@ -57,6 +57,10 @@ export class SalarySlipComponent implements OnInit {
 
   download() {
     this.window.print();
+  }
+
+  previousPage() {
+    this.router.navigate(['/home']);
   }
 
 }

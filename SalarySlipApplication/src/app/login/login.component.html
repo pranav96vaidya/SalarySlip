@@ -7,7 +7,7 @@
           <label for="email">Email</label>
         </div>
         <div class="col-8">
-          <input type="email" id="email" appHighlight class="form-control" ngModel name="email" required
+          <input type="email" id="email" appHighlight class="form-control" ngModel name="email"
             pattern="^[\w.+\-]+@newput\.com$" #newTemplateName="ngModel">
           <span class="help-block"
             *ngIf="loginForm.controls.email && !loginForm.controls.email.valid && loginForm.controls.email.dirty">Please
@@ -22,7 +22,7 @@
           <label for="password">Password</label>
         </div>
         <div class="col-8">
-          <input type="password" id="password" class="form-control" ngModel name="password" required>
+          <input type="password" id="password" class="form-control" ngModel name="password">
           <span class="help-block"
             *ngIf="loginForm.controls.password && loginForm.controls.password.touched && !loginForm.controls.password.valid && !loginForm.controls.password.dirty">This
             field is required</span>

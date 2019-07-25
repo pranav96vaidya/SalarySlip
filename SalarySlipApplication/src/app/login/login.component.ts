@@ -43,11 +43,11 @@ export class LoginComponent implements OnInit {
     // }
   }
 
-  // onSubmit() {
+  onSubmit() {
   //   const actionPayload = {
   //     email: this.loginForm.value.email,
   //     password: this.loginForm.value.password
-  //   };
+    };
     
   //   this.auth.login(actionPayload.email, actionPayload.password)
   //   .subscribe(res => {

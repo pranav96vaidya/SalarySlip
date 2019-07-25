@@ -16,7 +16,7 @@ export class AuthenticationGuardService {
         const isLoggedIn = this.authenticationService.isLoggedIn();
         
         if (!isLoggedIn) {
-            this.router.navigateByUrl('/login');
+            location.href="http://newput.timetracker.s3-website-us-west-1.amazonaws.com/login";
             return false;
         }
         return true;

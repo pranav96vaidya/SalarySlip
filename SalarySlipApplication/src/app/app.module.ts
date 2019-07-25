@@ -3,14 +3,18 @@ import { NgModule } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginModule } from './login/login.module';
-import { NavModule } from './nav/nav.module';
-import { FileUploadModule } from './file-upload/file-upload.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpInterceptorService } from './services/http-interceptor.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SalarySlipComponent } from './salary-slip/salary-slip.component';
 import { FooterComponent } from './footer/footer.component';
+import { SalaryListComponent } from './salary-list/salary-list.component';
+import { EmployeeSalaryComponent } from './employee-salary/employee-salary.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { NavComponent } from './nav/nav.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 // import { HttpInterceptorService } from './services/http-interceptor.service';
 // import { AuthenticationGuardService } from './services/authentication-gurad.service';
 // import { AuthenticationService } from './services/authentication.service';
@@ -21,15 +25,19 @@ import { FooterComponent } from './footer/footer.component';
     DashboardComponent,
     SalarySlipComponent,
     FooterComponent,
+    SalaryListComponent,
+    EmployeeSalaryComponent,
+    PageNotFoundComponent,
+    NavComponent,
+    FileUploadComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NavModule,
-    FileUploadModule,
-    LoginModule,
+    FormsModule,
     HttpClientModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    ReactiveFormsModule
   ],
   providers: [
     {

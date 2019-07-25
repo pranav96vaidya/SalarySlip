@@ -8,3 +8,9 @@
     padding-top: 20px;
     width: 100%;
 }
+
+@media print {
+    .footer {
+        display: none;
+    }
+}

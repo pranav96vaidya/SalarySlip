@@ -1,20 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Observable, forkJoin } from "rxjs";
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class UserDetailService {
+  baseUrl = environment.baseUrl;
 
   constructor(private http: HttpClient) { }
 
   getDetail(): Observable<any> {
-    return this.http.get("http://34.211.76.6:9095/rest/employee/detail");
+    let url = this.baseUrl + '/rest/employee/detail';
+    return this.http.get(url);
   }
 
   getEmployeeList(): Observable<any> {
-    return this.http.get("http://34.211.76.6:9095/rest/admin/employee"); 
+    let url = this.baseUrl + '/rest/admin/employee';
+    return this.http.get(url);
   }
 }

@@ -1,7 +1,6 @@
 .salary-slip-wrapper {
     border: 1px solid #000000;
     font-weight: 500;
-    margin-top: 20px;
     min-height: 300px;
     text-align: center;
     width: 100%;
@@ -39,6 +38,12 @@
 
         .authority-seal {
             border-bottom: 0;
+            text-align: center;
+
+            .seal-img {
+                margin-top: 20px;
+                width: 100px;
+            }
         }
 
         .sign-sections {
@@ -49,6 +54,12 @@
         .sign {
             border-bottom: 1px solid black;
             min-height: 100px;
+            text-align: right;
+
+            .sign-img {
+                margin-right: 100px;
+                margin-top: 15px;
+            }
         }
 
         .sign-content {
@@ -78,7 +89,7 @@
         bottom: 180px;
         color: gray;
         font-size: 60px;
-        left: 180px;
+        left: 230px;
         opacity: 0.1;
         position: absolute;
         transform: rotate(-50deg);
@@ -86,14 +97,26 @@
     }
 }
 
-.print-btn-container {
-    margin-top: 20px;
-    text-align: center;
+.btn-container {
+    margin-bottom: 15px;
+    padding-top: 15px;
 
-    .btn {
-        background-color: #337AB7;
+    .previous-btn-container {
+        padding: 0;
     }
-}
+    
+    .print-btn-container {
+        padding: 0;
+        text-align: right;
+    }
+
+    .back-btn,.print-btn {
+        background-color: #337AB7;
+        font-size: 14px;
+    }
+  }
+
+
 
 @media (max-width: 768px) {
     .salary-slip-wrapper {
@@ -101,5 +124,11 @@
         #watermark {
             display: none;
         }
+    }
+}
+
+@media print {
+    .btn-primary {
+        display: none;
     }
 }

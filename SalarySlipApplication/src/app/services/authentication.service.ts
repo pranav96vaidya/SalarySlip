@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs";
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthenticationService {
-
+  baseUrl = environment.baseUrl;
   constructor(private http: HttpClient) { }
   token = this.readCookie('token');
+
   getToken(): string {
-    console.log(this.token);
+    // console.log(this.token);
     return this.token;
   }
   
@@ -21,7 +23,9 @@ export class AuthenticationService {
     for(var i=0;i < ca.length;i++) {
         var c = ca[i];
         while (c.charAt(0)==' ') c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        if (c.indexOf(nameEQ) == 0) {
+          return c.substring(nameEQ.length,c.length);
+        } 
     }
     return null;
   }
@@ -35,6 +39,6 @@ export class AuthenticationService {
   }
 
   // login(email: string, password: string): Observable<any> {
-  //   return this.http.post("http://34.211.76.6:9095/rest/auth/login", {email,password});
+  //   return this.http.post(this.baseUrl + "/rest/auth/login", {email,password});
   // }
 }
